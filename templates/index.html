@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <style>
+        .card {
+            border: 2px solid red;
+            width: 20%;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 2px 2px 3px 3px black;
+            
+        }
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+            background-image: url('https://wallpaperset.com/w/full/b/d/b/461148.jpg');
+        }
+
+       .form-title{
+           text-align: center;
+           font-size: 30px;
+           margin: 30px 0;
+       }
+
+       .text-input{
+         width: 100%;
+         padding: 10px;
+         box-sizing: border-box;
+         border-radius: 5px;
+         border: 1px solid gray;
+         margin-bottom: 30px;
+         margin-top: 5px;
+       }    
+       .submit-btn{
+          background-color: gray;
+          color: white;
+          padding: 5px;
+          border-radius: 2.5px;
+          width: 100%;
+       }
+
+       </style>
+</head>
+
+<body>
+    <div class="card">
+        <h3 class="form-title">Login Page</h3>
+        <form>
+            <label for="">Email Address</label>
+            <input type="email" class="text-input">
+
+            <label for="">password</label>
+            <input type="password" class="text-input">
+
+            <button class="submit-btn">submit</button>
+        </form>
+
+    </div>
+</body>
+
+</html>
