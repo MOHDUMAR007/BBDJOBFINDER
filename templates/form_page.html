@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Information Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    form {
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background-color: #f9f9f9;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Student Upload Resume</h2>
+  <form action="/submit" method="POST" enctype="multipart/form-data">
+    
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="rollno">University Roll No</label>
+    <input type="text" id="rollno" name="rollno" required>
+
+    <label for="course">Course</label>
+    <input type="text" id="course" name="course" required>
+
+    <label for="batch">Batch</label>
+    <input type="text" id="batch" name="batch" required>
+
+    <label for="tenth">10th Percentage</label>
+    <input type="number" step="0.01" id="tenth" name="tenth" required>
+
+    <label for="twelfth">12th Percentage</label>
+    <input type="number" step="0.01" id="twelfth" name="twelfth" required>
+
+    <label for="grad">Current Graduation Percentage</label>
+    <input type="number" step="0.01" id="grad" name="grad" required>
+
+    <label for="address">Current Address</label>
+    <textarea id="address" name="address" rows="4" required></textarea>
+
+    <label for="resume">Upload Resume</label>
+    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+
+    <button type="submit">Submit</button>
+
+  </form>
+
+</body>
+</html>
