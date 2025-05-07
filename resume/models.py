@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+# Existing Resume model
 class Resume(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
@@ -17,3 +17,31 @@ class Resume(models.Model):
 
     def __str__(self):
         return self.name
+
+# New Company model
+class Company(models.Model):
+    name = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    industry = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+# New ResumeReference model
+class ResumeReference(models.Model):
+    resume = models.ForeignKey(Resume, on_delete=models.CASCADE, related_name='references')
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='references')
+    referred_on = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(
+        max_length=50,
+        choices=[
+            ('Pending', 'Pending'),
+            ('Accepted', 'Accepted'),
+            ('Rejected', 'Rejected'),
+        ],
+        default='Pending'
+    )
+    notes = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.resume.name} -> {self.company.name}"

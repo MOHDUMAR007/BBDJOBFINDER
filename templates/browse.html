@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Resumes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .search-filter {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], select {
+            padding: 8px;
+            margin: 0 10px;
+            width: 200px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f6f8;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Browse Resumes</h1>
+
+    <div class="search-filter">
+        <input type="text" id="searchInput" placeholder="Search by name or skill...">
+        <select id="courseFilter">
+            <option value="">All Courses</option>
+            {% for resume in resumesList|dictsort:"course" %}
+                <option value="{{ resume.course }}">{{ resume.course }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <table id="resumesTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Course</th>
+                <th>Batch</th>
+                <th>10th %</th>
+                <th>12th %</th>
+                <th>Grad %</th>
+                <th>Skills</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resume in resumesList %}
+            <tr>
+                <td>{{ resume.name }}</td>
+                <td>{{ resume.email }}</td>
+                <td>{{ resume.phone }}</td>
+                <td>{{ resume.course }}</td>
+                <td>{{ resume.batch }}</td>
+                <td>{{ resume.percentage_10 }}</td>
+                <td>{{ resume.percentage_12 }}</td>
+                <td>{{ resume.graduation_percentage }}</td>
+                <td>{{ resume.skills }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const courseFilter = document.getElementById("courseFilter");
+        const table = document.getElementById("resumesTable");
+        const rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+        function filterTable() {
+            const search = searchInput.value.toLowerCase();
+            const course = courseFilter.value.toLowerCase();
+
+            for (let row of rows) {
+                const cells = row.getElementsByTagName("td");
+                const name = cells[0].textContent.toLowerCase();
+                const skills = cells[8].textContent.toLowerCase();
+                const courseText = cells[3].textContent.toLowerCase();
+
+                const matchesSearch = name.includes(search) || skills.includes(search);
+                const matchesCourse = !course || courseText === course;
+
+                row.style.display = matchesSearch && matchesCourse ? "" : "none";
+            }
+        }
+
+        searchInput.addEventListener("input", filterTable);
+        courseFilter.addEventListener("change", filterTable);
+    </script>
+</body>
+</html>
