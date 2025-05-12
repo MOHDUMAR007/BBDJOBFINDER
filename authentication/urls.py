@@ -20,11 +20,10 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from . import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("",TemplateView.as_view(template_name = "index.html"), name = "home"),
-    path("",include('resume.urls'), name = "resume"),
-    path("",include('authentication.urls'), name = "authentication"),
-   
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('register/', views.register, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+]

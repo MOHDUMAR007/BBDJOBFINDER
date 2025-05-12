@@ -1,0 +1,48 @@
+<!-- filepath: c:\Users\PC\BBDJOBFINDER\templates\resume_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Details</title>
+    <style>
+        .card {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-family: Arial, sans-serif;
+        }
+        .card h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .card p {
+            margin: 8px 0;
+        }
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>{{ resume.name }}</h2>
+        <p><span class="label">Email:</span> {{ resume.email }}</p>
+        <p><span class="label">Phone:</span> {{ resume.phone }}</p>
+        <p><span class="label">Address:</span> {{ resume.address }}</p>
+        <p><span class="label">Course:</span> {{ resume.course }}</p>
+        <p><span class="label">Batch:</span> {{ resume.batch }}</p>
+        <p><span class="label">10th Percentage:</span> {{ resume.percentage_10 }}</p>
+        <p><span class="label">12th Percentage:</span> {{ resume.percentage_12 }}</p>
+        <p><span class="label">Graduation Percentage:</span> {{ resume.graduation_percentage }}</p>
+        <p><span class="label">Current Location:</span> {{ resume.current_location }}</p>
+        <p><span class="label">Skills:</span> {{ resume.skills }}</p>
+        {% if resume.upload_resume %}
+            <p><span class="label">Resume File:</span> <a href="{{ resume.upload_resume.url }}" download>Download</a></p>
+        {% endif %}
+    </div>
+</body>
+</html>

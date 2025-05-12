@@ -1,71 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
 
-    <style>
-        .card {
-            border: 2px solid red;
-            width: 20%;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px;
-            box-shadow: 2px 2px 3px 3px black;
-            
-        }
+    body {
+      height: 100vh;
+      background: linear-gradient(to right, #e0e0e0, #d0e0ec);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        body{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f2f2f2;
-            background-image: url('https://wallpaperset.com/w/full/b/d/b/461148.jpg');
-        }
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
 
-       .form-title{
-           text-align: center;
-           font-size: 30px;
-           margin: 30px 0;
-       }
+    .form-section, .image-section {
+      width: 50%;
+      padding: 50px;
+    }
 
-       .text-input{
-         width: 100%;
-         padding: 10px;
-         box-sizing: border-box;
-         border-radius: 5px;
-         border: 1px solid gray;
-         margin-bottom: 30px;
-         margin-top: 5px;
-       }    
-       .submit-btn{
-          background-color: gray;
-          color: white;
-          padding: 5px;
-          border-radius: 2.5px;
-          width: 100%;
-          
-       }
+    .form-section {
+      background: #f9f9f9;
+    }
 
-       </style>
+    .form-section h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .form-section p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    .form-group input:focus {
+      border-color: #555;
+    }
+
+    .forgot-password {
+      text-align: right;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .forgot-password a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .divider {
+      text-align: center;
+      font-size: 12px;
+      margin: 20px 0;
+      color: #999;
+    }
+
+    .google-btn {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .google-btn img {
+      width: 18px;
+      margin-right: 10px;
+    }
+
+    .signup {
+      text-align: center;
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    .signup a {
+      color: #333;
+      text-decoration: underline;
+    }
+
+    .image-section {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .image-section img {
+      width: 200px;
+      margin: 0 auto 30px;
+    }
+
+    .image-section h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .image-section p {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .form-section, .image-section {
+        width: 100%;
+        padding: 30px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="card">
-        <h3 class="form-title">Login Page</h3>
-        <form>
-            <label for="">Email Address</label>
-            <input type="email" class="text-input">
-
-            <label for="">password</label>
-            <input type="password" class="text-input">
-            <button class="submit-btn">submit</button>
-        </form>
-
+  <div class="container">
+    <div class="form-section">
+      <h2>Welcome Back!</h2>
+      <p>Please enter log in details below</p>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required />
+        </div>
+        <div class="forgot-password">
+          <a href="#">Forget password?</a>
+        </div>
+        <button type="submit" class="btn">Sign in</button>
+        <div class="divider">or continue</div>
+        <div class="google-btn">
+          <img src="https://www.gstatic.com/marketing-cms/assets/images/5b/1f/69801ce74b409f1e2b4399e9007a/google-go.webp=s96-fcrop64=1,00000000ffffffff-rw" alt="Google logo"/>
+          Login with Google
+        </div>
+        <div class="signup">
+          Don’t have an account? <a href="{% url 'register' %}">Sign Up</a>
+        </div>
+      </form>
     </div>
+    <div class="image-section">
+      <h3>Manage your Profile Here</h3>
+    </div>
+  </div>
 </body>
-
 </html>
