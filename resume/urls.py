@@ -18,8 +18,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
-from .views import browse, resumeDetail
+from .views import browse, resumeDetail, company_login, company_dashboard
+from . import views
+
 urlpatterns = [
+    path("", TemplateView.as_view(template_name="index.html"), name="home"),
     path("browse/", browse, name="browse"),
     path("view-detail/<int:resume_id>/", resumeDetail, name="resumeDetail"),
+    path('company_login/', company_login, name='company_login'),
+    path('company_dashboard/', company_dashboard, name='company_dashboard'),
+    path('company_register/', views.company_register, name='company_register'),
+    path('company_login/', views.company_login, name='company_login'),
+    path('company_dashboard/', views.company_dashboard, name='company_dashboard'),
+    path('company_logout/', views.company_logout, name='company_logout'),
+    path('resume_status/', views.resume_status, name='resume_status'),
+    path('upload_resume/', views.upload_resume, name='upload_resume'),
+    path('delete_resume/<int:resume_id>/', views.delete_resume, name='delete_resume'),
+    path('submit/', views.submit_resume, name='submit_resume'),
+    path('company_profile/', views.manage_company_profile, name='manage_company_profile'),
 ]

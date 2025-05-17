@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Existing Resume model
 class Resume(models.Model):
@@ -18,8 +19,9 @@ class Resume(models.Model):
     def __str__(self):
         return self.name
 
-# New Company model
+# Updated Company model
 class Company(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='company_profile', null=True, blank=True)
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     industry = models.CharField(max_length=100)
