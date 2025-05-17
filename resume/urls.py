@@ -20,6 +20,8 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from .views import browse, resumeDetail, company_login, company_dashboard
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="index.html"), name="home"),
@@ -36,4 +38,7 @@ urlpatterns = [
     path('delete_resume/<int:resume_id>/', views.delete_resume, name='delete_resume'),
     path('submit/', views.submit_resume, name='submit_resume'),
     path('company_profile/', views.manage_company_profile, name='manage_company_profile'),
-]
+    path('auth/', include('social_django.urls', namespace='social')),
+    path('accounts/', include('allauth.urls')),
+    path('help/', TemplateView.as_view(template_name="help.html"), name="help"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

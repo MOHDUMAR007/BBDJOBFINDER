@@ -25,6 +25,7 @@ class Company(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     industry = models.CharField(max_length=100)
+    photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)  # <-- Add this line
 
     def __str__(self):
         return self.name
@@ -47,3 +48,22 @@ class ResumeReference(models.Model):
 
     def __str__(self):
         return f"{self.resume.name} -> {self.company.name}"
+
+# New UserProfile model with photo field
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)
+    photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
+
+    def __str__(self):
+        return f"Profile of {self.user.username}"
+
+# Signal to create or update UserProfile when User is created or updated
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+    instance.userprofile.save()

@@ -102,9 +102,9 @@ def submit_resume(request):
 
 @login_required
 def manage_company_profile(request):
-    company, created = Company.objects.get_or_create(user=request.user)
+    company = request.user.company_profile
     if request.method == 'POST':
-        form = CompanyProfileForm(request.POST, instance=company)
+        form = CompanyProfileForm(request.POST, request.FILES, instance=company)
         if form.is_valid():
             form.save()
             return redirect('company_dashboard')
