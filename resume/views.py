@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Resume, ResumeReference, Company
 from .forms import ResumeForm, CompanyProfileForm
+from django.views.decorators.http import require_POST
 
 
 # Create your views here.
@@ -56,12 +57,12 @@ def company_register(request):
 
 @login_required
 def company_dashboard(request):
-    company = getattr(request.user, 'company_profile', None)
-    if not company:
-        messages.error(request, "No company profile found.")
-        return redirect('company_login')
-    references = ResumeReference.objects.filter(company=company).select_related('resume')
-    return render(request, 'company_dashboard.html', {'references': references})
+    company = request.user.company_profile  # or request.user.company if that's your model
+    references = ResumeReference.objects.filter(company=company)
+    return render(request, 'company_dashboard.html', {
+        'company': company,
+        'references': references,
+    })
 
 def company_logout(request):
     logout(request)
@@ -111,3 +112,13 @@ def manage_company_profile(request):
     else:
         form = CompanyProfileForm(instance=company)
     return render(request, 'company_profile.html', {'form': form})
+
+@require_POST
+@login_required
+def update_reference_status(request, ref_id):
+    reference = get_object_or_404(ResumeReference, id=ref_id, company=request.user.company_profile)
+    new_status = request.POST.get('status')
+    if new_status in ['Accepted', 'Rejected']:
+        reference.status = new_status
+        reference.save()
+    return redirect('company_dashboard')
