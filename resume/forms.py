@@ -1,5 +1,5 @@
 from django import forms
-from .models import Resume, Company
+from .models import Resume, Company, HelpRequest
 
 class ResumeForm(forms.ModelForm):
     class Meta:
@@ -24,3 +24,17 @@ class CompanyProfileForm(forms.ModelForm):
     class Meta:
         model = Company
         fields = ['name', 'location', 'industry']
+
+class HelpRequestForm(forms.ModelForm):
+    class Meta:
+        model = HelpRequest
+        fields = ['email', 'message']
+        widgets = {
+            'email': forms.EmailInput(attrs={
+                'class': 'w-full px-4 py-2 border-2 border-indigo-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition'
+            }),
+            'message': forms.Textarea(attrs={
+                'class': 'w-full px-4 py-2 border-2 border-indigo-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition',
+                'rows': 4
+            }),
+        }
