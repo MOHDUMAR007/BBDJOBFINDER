@@ -20,10 +20,46 @@
       <div class="hidden md:flex items-center space-x-6">
         <!-- Navigation Links -->
         <nav class="flex space-x-6">
-          <a href="#" class="hover:text-indigo-500">Company Profile</a>
-          <a href="{% url 'upload_resume' %}" class="hover:text-indigo-500">Upload</a>
-          <a href="#" class="hover:text-indigo-500">About</a>
-          <a href="{% url 'help' %}" class="hover:text-indigo-500">Help</a>
+          <a href="{% url 'manage_company_profile' %}" class="hover:text-indigo-500 flex flex-col items-center">
+            <span class="inline-block bg-indigo-100 text-indigo-600 rounded-full p-2 mb-1">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 15c2.21 0 4.304.534 6.121 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </span>
+            <span class="text-xs">Company Profile</span>
+          </a>
+          <a href="{% url 'upload_resume' %}" class="hover:text-indigo-500 flex flex-col items-center">
+            <span class="inline-block bg-indigo-100 text-indigo-600 rounded-full p-2 mb-1">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+              </svg>
+            </span>
+            <span class="text-xs">Upload</span>
+          </a>
+          <a href="{% url 'resume_status' %}" class="hover:text-indigo-500 flex flex-col items-center">
+            <span class="inline-block bg-indigo-100 text-indigo-600 rounded-full p-2 mb-1">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2a4 4 0 018 0v2M12 11a4 4 0 100-8 4 4 0 000 8z" />
+              </svg>
+            </span>
+            <span class="text-xs">Resume Status</span>
+          </a>
+          <a href="{% url 'company_dashboard' %}" class="hover:text-indigo-500 flex flex-col items-center">
+            <span class="inline-block bg-indigo-100 text-indigo-600 rounded-full p-2 mb-1">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 8h2v-2H7v2zm0-4h2v-2H7v2zm0-4h2V7H7v2zm4 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2zm4 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z" />
+              </svg>
+            </span>
+            <span class="text-xs">Company Dashboard</span>
+          </a>
+          <a href="{% url 'help' %}" class="hover:text-indigo-500 flex flex-col items-center">
+            <span class="inline-block bg-indigo-100 text-indigo-600 rounded-full p-2 mb-1">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 14h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8s-9-3.582-9-8 4.03-8 9-8 9 3.582 9 8z" />
+              </svg>
+            </span>
+            <span class="text-xs">Help</span>
+          </a>
         </nav>
       
         <!-- Signup & Login Buttons -->
@@ -47,7 +83,6 @@
     <p class="text-lg md:text-xl max-w-2xl mx-auto">Efficient placement services to bridge the gap between talent and opportunity at BBD.</p>
     <div class="mt-8 flex justify-center gap-4">
       <a href="{% url 'company_register' %}" class="bg-white text-indigo-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-200">Get Started</a>
-      <a href="#" class="bg-indigo-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-indigo-700">Learn More</a>
     </div>
   </section>
 
@@ -108,8 +143,7 @@
       <div>
         <div class="mb-4 font-bold uppercase tracking-widest text-gray-100">Company</div>
         <nav class="flex flex-col gap-2 text-gray-400">
-          <a href="#" class="hover:text-indigo-300">About</a>
-          <a href="#" class="hover:text-indigo-300">Jobs</a>
+          <a href="{% url 'about' %}" class="hover:text-indigo-300">About</a>
         </nav>
       </div>
   
@@ -117,8 +151,7 @@
       <div class="items-center text-center">
         <div class="mb-4 font-bold uppercase tracking-widest text-gray-100">Support</div>
         <nav class="flex flex-col gap-2 text-gray-400">
-          <a href="#" class="hover:text-indigo-300">Contact</a>
-          <a href="#" class="hover:text-indigo-300">FAQ</a>
+          <a href="{% url 'contact' %}" class="hover:text-indigo-300">Contact</a>
         </nav>
       </div>
   
@@ -126,9 +159,8 @@
       <div class="items-end text-right">
         <div class="mb-4 font-bold uppercase tracking-widest text-gray-100">Legal</div>
         <nav class="flex flex-col gap-2 text-gray-400">
-          <a href="#" class="hover:text-indigo-300">Terms of Service</a>
-          <a href="#" class="hover:text-indigo-300">Privacy Policy</a>
-          <a href="#" class="hover:text-indigo-300">Cookie settings</a>
+          <a href="{% url 'terms' %}" class="hover:text-indigo-300">Terms of Service</a>
+          <a href="{% url 'privacy' %}" class="hover:text-indigo-300">Privacy Policy</a>
         </nav>
       </div>
     </div>
