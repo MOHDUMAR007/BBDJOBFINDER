@@ -2,75 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Student Information Form</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-    }
-    form {
-      border: 1px solid #ccc;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      background-color: #f9f9f9;
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      box-sizing: border-box;
-    }
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-    }
-  </style>
+  <title>Student Upload Resume</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-
-  <h2>Student Upload Resume</h2>
-  <form action="/submit" method="POST" enctype="multipart/form-data">
-    
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required>
-
-    <label for="email">Email Address</label>
-    <input type="email" id="email" name="email" required>
-
-    <label for="rollno">University Roll No</label>
-    <input type="text" id="rollno" name="rollno" required>
-
-    <label for="course">Course</label>
-    <input type="text" id="course" name="course" required>
-
-    <label for="batch">Batch</label>
-    <input type="text" id="batch" name="batch" required>
-
-    <label for="tenth">10th Percentage</label>
-    <input type="number" step="0.01" id="tenth" name="tenth" required>
-
-    <label for="twelfth">12th Percentage</label>
-    <input type="number" step="0.01" id="twelfth" name="twelfth" required>
-
-    <label for="grad">Current Graduation Percentage</label>
-    <input type="number" step="0.01" id="grad" name="grad" required>
-
-    <label for="address">Current Address</label>
-    <textarea id="address" name="address" rows="4" required></textarea>
-
-    <label for="resume">Upload Resume</label>
-    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
-
-    <button type="submit">Submit</button>
-
-  </form>
-
+<body class="bg-gradient-to-br from-blue-50 via-white to-gray-100 min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-8 border border-blue-100">
+    <div class="mb-6 text-center">
+      <svg class="mx-auto w-12 h-12 text-blue-600 mb-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+      </svg>
+      <h2 class="text-2xl font-extrabold text-blue-700 mb-1 tracking-tight">Student Upload Resume</h2>
+      <p class="text-gray-500">Please fill in your details and upload your resume.</p>
+    </div>
+    <form action="{% url 'submit_resume' %}" method="POST" enctype="multipart/form-data" class="space-y-5">
+      {% csrf_token %}
+      <div>
+        <label for="name" class="block text-gray-700 font-semibold mb-1">Name</label>
+        <input type="text" id="name" name="name" required class="w-full px-4 py-2 border-2 border-blue-300 bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+      </div>
+      <div>
+        <label for="email" class="block text-gray-700 font-semibold mb-1">Email Address</label>
+        <input type="email" id="email" name="email" required class="w-full px-4 py-2 border-2 border-blue-300 bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+      </div>
+      <div>
+        <label for="rollno" class="block text-gray-700 font-semibold mb-1">University Roll No</label>
+        <input type="text" id="rollno" name="rollno" required class="w-full px-4 py-2 border-2 border-blue-300 bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+      </div>
+      <div>
+        <label for="course" class="block text-gray-700 font-semibold mb-1">Course</label>
+        <input type="text" id="course" name="course" required class="w-full px-4 py-2 border-2 border-blue-300 bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+      </div>
+      <div>
+        <label for="batch" class="block text-gray-700 font-semibold mb-1">Batch</label>
+        <input type="text" id="batch" name="batch" required class="w-full px-4 py-2 border-2 border-blue-300 bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+      </div>
+      <div>
+        <label for="tenth" class="block text-gray-700 font-semibold mb-1">10th Percentage</label>
+        <input type="number" step="0.01" id="tenth" name="tenth" required class="w-full px-4 py-2 border-2 border-blue-300 bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+      </div>
+      <div>
+        <label for="twelfth" class="block text-gray-700 font-semibold mb-1">12th Percentage</label>
+        <input type="number" step="0.01" id="twelfth" name="twelfth" required class="w-full px-4 py-2 border-2 border-blue-300 bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+      </div>
+      <div>
+        <label for="grad" class="block text-gray-700 font-semibold mb-1">Current Graduation Percentage</label>
+        <input type="number" step="0.01" id="grad" name="grad" required class="w-full px-4 py-2 border-2 border-blue-300 bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+      </div>
+      <div>
+        <label for="address" class="block text-gray-700 font-semibold mb-1">Current Address</label>
+        <textarea id="address" name="address" rows="3" required class="w-full px-4 py-2 border-2 border-blue-300 bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"></textarea>
+      </div>
+      <div>
+        <label for="phone" class="block text-gray-700 font-semibold mb-1">Phone Number</label>
+        <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" maxlength="10"
+               class="w-full px-4 py-2 border-2 border-blue-300 bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+               placeholder="Enter 10-digit phone number"/>
+      </div>
+      <div>
+        <label for="resume" class="block text-gray-700 font-semibold mb-1">Upload Resume</label>
+        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required class="w-full px-4 py-2 border-2 border-blue-300 bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+      </div>
+      <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition text-lg shadow">
+        Submit
+      </button>
+    </form>
+  </div>
 </body>
 </html>

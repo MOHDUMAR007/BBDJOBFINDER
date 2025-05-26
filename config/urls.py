@@ -26,5 +26,4 @@ urlpatterns = [
     path("",TemplateView.as_view(template_name = "index.html"), name = "home"),
     path("",include('resume.urls'), name = "resume"),
     path("",include('authentication.urls'), name = "authentication"),
-   
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
