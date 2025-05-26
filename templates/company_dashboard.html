@@ -18,7 +18,16 @@
             </div>
             <nav>
                 <ul class="flex gap-6 text-gray-700 font-medium">
-                    <li><a href="{% url 'company_logout' %}" class="hover:text-blue-700 transition">Logout</a></li>
+                    <li>
+                        <a href="{% url 'home' %}" class="hover:text-blue-700 transition">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'company_logout' %}" class="hover:text-blue-700 transition">
+                            Logout
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
