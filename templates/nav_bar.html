@@ -13,7 +13,16 @@
         <a href="{% url 'browse' %}" class="text-blue-700 font-semibold hover:text-blue-900 transition">Browse Resumes</a>
         <a href="{% url 'upload_resume' %}" class="text-blue-700 font-semibold hover:text-blue-900 transition">Upload Resume</a>
         <a href="{% url 'resume_status' %}" class="text-blue-700 font-semibold hover:text-blue-900 transition">Resume Status</a>
-        <a href="{% url 'company_dashboard' %}" class="text-blue-700 font-semibold hover:text-blue-900 transition">Company Dashboard</a>
+        {% if user.is_authenticated and user.company_profile %}
+          <a href="{% url 'company_dashboard' %}" class="hover:text-indigo-500 flex flex-col items-center">
+            <span class="inline-block bg-indigo-100 text-indigo-600 rounded-full p-2 mb-1">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 8h2v-2H7v2zm0-4h2v-2H7v2zm0-4h2V7H7v2zm4 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2zm4 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V7h-2v2z" />
+              </svg>
+            </span>
+            <span class="text-xs">Company Dashboard</span>
+          </a>
+        {% endif %}
       </div>
       <div class="flex gap-3">
         {% if user.is_authenticated %}

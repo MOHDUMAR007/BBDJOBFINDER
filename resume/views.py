@@ -4,7 +4,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Resume, ResumeReference, Company
-from .forms import ResumeForm, CompanyProfileForm
+from .forms import ResumeForm, CompanyProfileForm, HelpRequestForm
+from django.views.decorators.http import require_POST
+from django.http import HttpResponseForbidden
 
 
 # Create your views here.
@@ -56,12 +58,14 @@ def company_register(request):
 
 @login_required
 def company_dashboard(request):
-    company = getattr(request.user, 'company_profile', None)
-    if not company:
-        messages.error(request, "No company profile found.")
-        return redirect('company_login')
-    references = ResumeReference.objects.filter(company=company).select_related('resume')
-    return render(request, 'company_dashboard.html', {'references': references})
+    if not hasattr(request.user, 'company_profile'):
+        return HttpResponseForbidden("You do not have access to the company dashboard.")
+    company = request.user.company_profile
+    references = ResumeReference.objects.filter(company=company)
+    return render(request, 'company_dashboard.html', {
+        'company': company,
+        'references': references,
+    })
 
 def company_logout(request):
     logout(request)
@@ -102,7 +106,12 @@ def submit_resume(request):
 
 @login_required
 def manage_company_profile(request):
-    company = request.user.company_profile
+    # Check if the user has a company_profile (Company object)
+    company = getattr(request.user, 'company_profile', None)
+    if not company:
+        messages.error(request, "You do not have a company profile. Please register as a company.")
+        return redirect('home')  # or another appropriate page
+
     if request.method == 'POST':
         form = CompanyProfileForm(request.POST, request.FILES, instance=company)
         if form.is_valid():
@@ -111,3 +120,23 @@ def manage_company_profile(request):
     else:
         form = CompanyProfileForm(instance=company)
     return render(request, 'company_profile.html', {'form': form})
+
+@require_POST
+@login_required
+def update_reference_status(request, ref_id):
+    reference = get_object_or_404(ResumeReference, id=ref_id, company=request.user.company_profile)
+    new_status = request.POST.get('status')
+    if new_status in ['Accepted', 'Rejected']:
+        reference.status = new_status
+        reference.save()
+    return redirect('company_dashboard')
+
+def help_view(request):
+    if request.method == 'POST':
+        form = HelpRequestForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'help.html', {'form': HelpRequestForm(), 'success': True})
+    else:
+        form = HelpRequestForm()
+    return render(request, 'help.html', {'form': form})

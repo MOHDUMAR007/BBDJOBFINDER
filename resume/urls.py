@@ -40,5 +40,10 @@ urlpatterns = [
     path('company_profile/', views.manage_company_profile, name='manage_company_profile'),
     path('auth/', include('social_django.urls', namespace='social')),
     path('accounts/', include('allauth.urls')),
-    path('help/', TemplateView.as_view(template_name="help.html"), name="help"),
+    path('help/', views.help_view, name='help'),
+    path('about/', TemplateView.as_view(template_name="about.html"), name="about"),
+    path('contact/', TemplateView.as_view(template_name="contact.html"), name="contact"),
+    path('terms/', TemplateView.as_view(template_name="Terms.html"), name="terms"),
+    path('privacy/', TemplateView.as_view(template_name="privacy.html"), name="privacy"),
+    path('reference/<int:ref_id>/update/', views.update_reference_status, name='update_reference_status'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
